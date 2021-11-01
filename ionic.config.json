@@ -1,0 +1,7 @@
+{
+  "name": "apppesaje",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
