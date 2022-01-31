@@ -1,0 +1,53 @@
+<div class='registro'>
+  <!-- <ion-item lines="none">
+    <ion-avatar slot="start">
+      <img src="/assets/avatars/av-1.png" />
+    </ion-avatar>
+    <ion-label>
+      <h3>Fredy Estrada</h3>
+      <h5>fredyinstr@gmail.com</h5>
+    </ion-label>
+  </ion-item> -->
+
+  
+  <ion-item lines="none">
+    <ion-label text-wrap>
+      <p>
+        <span *ngIf="registro.placa">Llega vehículo con placas {{registro.placa}} </span>
+        <span *ngIf="registro.conductor">conducido por {{registro.conductor}} </span>
+        <span *ngIf="registro.tipo">para {{registro.tipo}}</span>
+        <span *ngIf="registro.bultos"> con {{registro.bultos}} bultos</span>
+        <span *ngIf="registro.horaLlegada"> el {{ registro.horaLlegada | date: "short" }}</span>
+        <span *ngIf="registro.procedencia"> procedente de {{ registro.procedencia }}</span>
+        <span *ngIf="registro.destino"> con destino a {{ registro.destino }}</span>
+        <span *ngIf="registro.pesoOrigen">, llega con un peso desde origen de {{ registro.pesoOrigen }} Kg</span>
+        <span *ngIf="registro.bultos"> y {{ registro.bultos }} bultos</span>
+        <span *ngIf="registro.horaCargado"><br>Se pesa la carga el {{ registro.horaCargado | date: "short" }}</span>
+        <span *ngIf="registro.pesoCargado"> registrando un peso de {{ registro.pesoCargado }} Kg</span>
+        <span *ngIf="registro.horaDescargado"><br>Se pesa el vehículo descargado el {{ registro.horaDescargado | date: "short" }}</span>
+        <span *ngIf="registro.pesoDescargado"> registrando un peso de {{ registro.pesoDescargado }} Kg</span>
+        <span *ngIf="registro.diferencia"><br> <b>Diferencia cargue/descargue {{ registro.diferencia }} Kg</b> </span>
+        <span *ngIf="registro.novedadLlegada"><br>{{ registro.novedadLlegada }}</span>
+        <span *ngIf="registro.novedadCargado"><br>{{ registro.novedadCargado }}</span>
+        <span *ngIf="registro.novedadDescargado"><br>{{ registro.novedadDescargado }}</span>        
+      </p>
+    </ion-label>
+  </ion-item>
+
+  <ion-slides mode="ios" pager="ios" scrollbar="ios" *ngIf="registro.imgsIngreso.length > 1"> 
+    <ion-slide  *ngFor="let img of registro.imgsIngreso"
+                class="image-slide"
+                [style]= "(img | imagen: registro.usuario._id: registro.referencia) | domSanitizer">
+    </ion-slide>  
+  </ion-slides>
+
+  <ion-slides mode="ios" scrollbar="ios" *ngIf="registro.imgsIngreso.length === 1">
+    <ion-slide class="image-slide"
+    [style]= "(registro.imgsIngreso[0] | imagen: registro.usuario._id: registro.referencia) | domSanitizer"> 
+    </ion-slide>  
+  </ion-slides>
+
+  <ion-item lines="none">
+    <ion-icon slot="end" name="create"  (click)="editar()" ></ion-icon>
+  </ion-item>
+</div>

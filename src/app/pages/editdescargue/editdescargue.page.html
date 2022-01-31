@@ -1,0 +1,201 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar descargue</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab-button (click)="tomarFoto()" color="secondary">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-row>
+    <ion-col size="3" *ngFor="let image of tempImages">
+      <ion-card>
+        <img [src]="image">
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="tempImages.length>0">
+    <ion-col size="12">
+      <small>Las imágenes se guardarán cuando realice una actualización del registro</small>
+    </ion-col>
+  </ion-row>
+
+  <form #formulario='ngForm' (ngSubmit)="actualizar()">
+    <ion-list>
+
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Información llegada vehículo</ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-label>Hora: </ion-label>
+          <ion-datetime 
+                display-format="MMM DD hh:mm a"
+                name="horaLlegada"
+                required
+                [(ngModel)]="registro.horaLlegada"
+                ></ion-datetime>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>Conductor: </ion-label>
+          <ion-input 
+              type="text" 
+              placeholder=""
+              name="conductor"
+              [(ngModel)]="registro.conductor"
+              required
+              ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Placa vehículo: </ion-label>
+          <ion-input 
+              type="text" 
+              placeholder=""
+              name="placa"
+              [(ngModel)]="registro.placa"
+              required
+              ></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="registro.tipo==='descargue'">
+          <ion-label>Procedencia: </ion-label>
+          <ion-input 
+              type="text" 
+              placeholder=""
+              name="procedencia"
+              [(ngModel)]="registro.procedencia"
+              ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Destino: </ion-label>
+          <ion-input 
+              type="text" 
+              placeholder=""
+              name="destino"
+              [(ngModel)]="registro.destino"
+              ></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="registro.tipo==='descargue'">
+          <ion-label>Peso origen(Kg): </ion-label>
+          <ion-input 
+              type="number" 
+              name="pesoOrigen"
+              [(ngModel)]="registro.pesoOrigen"
+              ></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="registro.tipo==='descargue'">
+          <ion-label>Cant. bultos: </ion-label>
+          <ion-input 
+              type="number" 
+              name="bultos"
+              [(ngModel)]="registro.bultos"              
+              ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Novedades</ion-label>
+          <ion-textarea
+                name="novedadLlegada"
+                [(ngModel)]="registro.novedadLlegada"></ion-textarea>
+        </ion-item>
+      
+
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Báscula cargado</ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-label>Hora: </ion-label>
+          <ion-datetime 
+              display-format="MMM DD hh:mm a"
+              name="horaCargado"
+              [(ngModel)]="registro.horaCargado"></ion-datetime>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>Peso (Kg): </ion-label>
+          <ion-input 
+              type="number" 
+              name="pesoCargado"
+              [(ngModel)]="registro.pesoCargado"
+              ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Novedad</ion-label>
+          <ion-textarea
+                name="novedadCargado"
+                [(ngModel)]="registro.novedadCargado"></ion-textarea>
+        </ion-item>
+
+               
+
+      </ion-item-group>
+
+      <ion-item-group *ngIf="registro.tipo==='descargue'">
+        <ion-item-divider>
+          <ion-label>Báscula descargado</ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-label>Hora: </ion-label>
+          <ion-datetime 
+              display-format="MMM DD hh:mm a"
+              name="horaDescargado"
+              [(ngModel)]="registro.horaDescargado"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Peso (Kg): </ion-label>
+          <ion-input 
+                type="number" 
+                name="pesoDescargado"
+                [(ngModel)]="registro.pesoDescargado"></ion-input>
+          <!-- <h5 class="total">Tot. descargado: {{registro.pesoCargado - registro.pesoDescargado}} Kg</h5> -->
+        </ion-item>
+        <ion-item>
+          <ion-label class="total">Tot. descargado: {{registro.pesoCargado - registro.pesoDescargado}} Kg</ion-label>
+        </ion-item>
+        
+      
+        <ion-item>
+          <ion-label>Novedad</ion-label>
+          <ion-textarea
+                name="novedadDescargado"
+                [(ngModel)]="registro.novedadDescargado"></ion-textarea>
+        </ion-item>
+
+      </ion-item-group>
+
+      </ion-list>
+
+        
+      <ion-button type="submit" shape="round" [disabled]="formulario.invalid" expand="block">
+        Actualizar registro
+      </ion-button>
+  </form>
+
+  
+
+  {{status}}
+
+
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+        <ion-icon slot="icon-only" name="bonfire"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+      Registros realizados
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- <app-header titulo='Registros realizados'></app-header> -->
+
+<ion-content [fullscreen]="true" color="light">
+  <!-- Refresher -->
+  
+  <ion-refresher slot="fixed" (ionRefresh)="recargar($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Registros -->
+
+  <app-registros [registros]=registros></app-registros>
+
+  <!-- Infinite scroll -->
+
+  <ion-infinite-scroll  threshold="150px" [disabled]="!habilitado" position="bottom" (ionInfinite)="siguientes($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
